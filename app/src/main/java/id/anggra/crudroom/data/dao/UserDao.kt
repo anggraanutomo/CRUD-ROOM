@@ -1,9 +1,6 @@
 package id.anggra.crudroom.data.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import id.anggra.crudroom.data.entity.User
 
 
@@ -20,4 +17,7 @@ interface UserDao {
 
     @Delete
     fun delete(user: User)
+
+    @Update
+    fun update(user: User)
 }
