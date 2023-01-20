@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CrudRoom</string>
+    <string-array name="items_option">
+        <item>Update</item>
+        <item>Delete</item>
+    </string-array>
 </resources>

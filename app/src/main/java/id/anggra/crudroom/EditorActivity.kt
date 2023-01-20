@@ -25,18 +25,38 @@ class EditorActivity : AppCompatActivity() {
 
         database = AppDatabase.getInstance(applicationContext)
 
+        var intent = intent.extras
+        if (intent != null) {
+            fullName.setText(intent.getString("full_name"))
+            email.setText(intent.getString("email"))
+            phone.setText(intent.getString("phone"))
+        }
+
+
         btnSave.setOnClickListener {
             if (fullName.text.toString().isNotEmpty() && email.text.toString()
                     .isNotEmpty() && phone.text.toString().isNotEmpty()
             ) {
-                database.userDao().insertAll(
-                    User(
-                        null,
+                if (intent != null) {
+                    // edit data
+                    database.userDao().update(User(
+                        intent.getInt("id", 0),
                         fullName.text.toString(),
                         email.text.toString(),
                         phone.text.toString()
+                    ))
+
+                } else {
+                    // tambah data
+                    database.userDao().insertAll(
+                        User(
+                            null,
+                            fullName.text.toString(),
+                            email.text.toString(),
+                            phone.text.toString()
+                        )
                     )
-                )
+                }
                 finish()
             } else {
                 Toast.makeText(
